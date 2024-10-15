@@ -22,13 +22,34 @@ namespace DovizKurCevir
 
         private void btnCalistir_Click(object sender, EventArgs e)
         {
-
-            if (!double.TryParse(txtValue.Text, out double value))
+            int doluSayisi = 0;
+            string kurTipi = "";
+            if (double.TryParse(textTL.Text.Replace('.', ','), out double valueTL))
+            {
+                doluSayisi++;
+                kurTipi = "TL";
+            }
+            if (double.TryParse(textUSD.Text.Replace('.', ','), out double valueUSD))
+            {
+                doluSayisi++;
+                kurTipi = "USD";
+            }
+            if (double.TryParse(txtEUR.Text.Replace('.', ','), out double valueEUR)) 
+            { 
+                doluSayisi++;
+                kurTipi = "EUR";
+            }
+           
+            if (doluSayisi == 0)
             {
                 MessageBox.Show("Lütfen geçerli bir sayı girin.");
                 return;
             }
-
+            if (doluSayisi > 1)
+            {
+                MessageBox.Show("Lütfen tek bir kutu girin.");
+                return;
+            }
             string selectedCurrency = rbTL.Checked ? "TRY" : rbEURO.Checked ? "EUR" : rbUSD.Checked ? "USD" : null;
 
             if (selectedCurrency == null)
@@ -79,16 +100,50 @@ namespace DovizKurCevir
                 switch (selectedCurrency)
                 {
                     case "EUR":
-                        txtResult.Text = $"USD: {(value * (eurRate / usdRate)).ToString("F2", CultureInfo.InvariantCulture)}{Environment.NewLine}";
-                        txtResult.Text += $"TRY: {(value * eurRate).ToString("F2", CultureInfo.InvariantCulture)}{Environment.NewLine}";
+                        if (kurTipi == "TL")
+                        {
+                            txtResult.Text += $"EURO: {(valueTL / eurRate).ToString("F2", CultureInfo.GetCultureInfo("tr-TR"))}{Environment.NewLine}";
+                        }
+                        else if (kurTipi == "USD")
+                        {
+                            txtResult.Text = $"EURO: {(valueUSD / (eurRate / usdRate)).ToString("F2", CultureInfo.GetCultureInfo("tr-TR"))}{Environment.NewLine}";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Aynı birimler dönüştürülemez.");
+                            return;
+                        }
                         break;
                     case "USD":
-                        txtResult.Text = $"EURO: {(value * (usdRate / eurRate)).ToString("F2", CultureInfo.InvariantCulture)}{Environment.NewLine}";
-                        txtResult.Text += $"TRY: {(value * usdRate).ToString("F2", CultureInfo.InvariantCulture)}{Environment.NewLine}";
-                        break;
+                        if (kurTipi == "TL")
+                        {
+                            txtResult.Text += $"USD: {(valueTL / usdRate).ToString("F2", CultureInfo.GetCultureInfo("tr-TR"))}{Environment.NewLine}";
+                        }
+                        else if (kurTipi == "EUR")
+                        {
+                            txtResult.Text = $"USD: {(valueEUR / (usdRate / eurRate)).ToString("F2", CultureInfo.GetCultureInfo("tr-TR"))}{Environment.NewLine}";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Aynı birimler dönüştürülemez.");
+                            return;
+                        }
+                        break;    
                     case "TRY":
-                        txtResult.Text = $"USD: {(value / usdRate).ToString("F2", CultureInfo.InvariantCulture)}{Environment.NewLine}";
-                        txtResult.Text += $"EURO: {(value / eurRate).ToString("F2", CultureInfo.InvariantCulture)}{Environment.NewLine}";
+                        if (kurTipi == "USD")
+                        {
+                            txtResult.Text = $"TRY: {(valueUSD * usdRate).ToString("F2", CultureInfo.GetCultureInfo("tr-TR"))}{Environment.NewLine}";
+                        }
+                        else if (kurTipi == "EUR")
+                        {
+                            txtResult.Text += $"TRY: {(valueEUR * eurRate).ToString("F2", CultureInfo.GetCultureInfo("tr-TR"))}{Environment.NewLine}";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Aynı birimler dönüştürülemez.");
+                            return;
+                        }
+                    
                         break;
                 }
             }
