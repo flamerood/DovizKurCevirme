@@ -1,0 +1,10 @@
+C:\Users\Acer-PC\source\repos\DovizKurCevir\DovizKurCevir\bin\Debug\DovizKurCevir.exe.config
+C:\Users\Acer-PC\source\repos\DovizKurCevir\DovizKurCevir\bin\Debug\DovizKurCevir.exe
+C:\Users\Acer-PC\source\repos\DovizKurCevir\DovizKurCevir\bin\Debug\DovizKurCevir.pdb
+C:\Users\Acer-PC\source\repos\DovizKurCevir\DovizKurCevir\obj\Debug\DovizKurCevir.csproj.AssemblyReference.cache
+C:\Users\Acer-PC\source\repos\DovizKurCevir\DovizKurCevir\obj\Debug\DovizKurCevir.Properties.Resources.resources
+C:\Users\Acer-PC\source\repos\DovizKurCevir\DovizKurCevir\obj\Debug\DovizKurCevir.csproj.GenerateResource.cache
+C:\Users\Acer-PC\source\repos\DovizKurCevir\DovizKurCevir\obj\Debug\DovizKurCevir.csproj.CoreCompileInputs.cache
+C:\Users\Acer-PC\source\repos\DovizKurCevir\DovizKurCevir\obj\Debug\DovizKurCevir.exe
+C:\Users\Acer-PC\source\repos\DovizKurCevir\DovizKurCevir\obj\Debug\DovizKurCevir.pdb
+C:\Users\Acer-PC\source\repos\DovizKurCevir\DovizKurCevir\obj\Debug\DovizKurCevir.Main.resources
