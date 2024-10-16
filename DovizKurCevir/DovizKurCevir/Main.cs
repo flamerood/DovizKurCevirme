@@ -97,54 +97,47 @@ namespace DovizKurCevir
 
                 txtResult.Clear();
 
+                double result = 0;
+
                 switch (selectedCurrency)
                 {
                     case "EUR":
                         if (kurTipi == "TL")
-                        {
-                            txtResult.Text += $"EURO: {(valueTL / eurRate).ToString("F2", CultureInfo.GetCultureInfo("tr-TR"))}{Environment.NewLine}";
-                        }
+                            result = valueTL / eurRate;
                         else if (kurTipi == "USD")
-                        {
-                            txtResult.Text = $"EURO: {(valueUSD / (eurRate / usdRate)).ToString("F2", CultureInfo.GetCultureInfo("tr-TR"))}{Environment.NewLine}";
-                        }
+                            result = valueUSD / (eurRate / usdRate);
                         else
-                        {
-                            MessageBox.Show("Aynı birimler dönüştürülemez.");
-                            return;
-                        }
+                            ShowError();
                         break;
+
                     case "USD":
                         if (kurTipi == "TL")
-                        {
-                            txtResult.Text += $"USD: {(valueTL / usdRate).ToString("F2", CultureInfo.GetCultureInfo("tr-TR"))}{Environment.NewLine}";
-                        }
+                            result = valueTL / usdRate;
                         else if (kurTipi == "EUR")
-                        {
-                            txtResult.Text = $"USD: {(valueEUR / (usdRate / eurRate)).ToString("F2", CultureInfo.GetCultureInfo("tr-TR"))}{Environment.NewLine}";
-                        }
+                            result = valueEUR / (usdRate / eurRate);
                         else
-                        {
-                            MessageBox.Show("Aynı birimler dönüştürülemez.");
-                            return;
-                        }
-                        break;    
+                            ShowError();
+                        break;
+
                     case "TRY":
                         if (kurTipi == "USD")
-                        {
-                            txtResult.Text = $"TRY: {(valueUSD * usdRate).ToString("F2", CultureInfo.GetCultureInfo("tr-TR"))}{Environment.NewLine}";
-                        }
+                            result = valueUSD * usdRate;
                         else if (kurTipi == "EUR")
-                        {
-                            txtResult.Text += $"TRY: {(valueEUR * eurRate).ToString("F2", CultureInfo.GetCultureInfo("tr-TR"))}{Environment.NewLine}";
-                        }
+                            result = valueEUR * eurRate;
                         else
-                        {
-                            MessageBox.Show("Aynı birimler dönüştürülemez.");
-                            return;
-                        }
-                    
+                            ShowError();
                         break;
+                }
+
+                if (result != 0)
+                {
+                    txtResult.Text += $"{selectedCurrency}: {result.ToString("N2", CultureInfo.GetCultureInfo("tr-TR"))}{Environment.NewLine}";
+                }
+
+                void ShowError()
+                {
+                    MessageBox.Show("Aynı birimler dönüştürülemez.");
+                    return;
                 }
             }
             catch (Exception ex)
